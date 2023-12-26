@@ -69,7 +69,7 @@ let textShowing = false;
 let textAlpha = 0.0
 
 let letterShown = false;
-
+let balloonCooldown = 100
 
 class Balloon {
     constructor(image, x, y) {
@@ -79,14 +79,20 @@ class Balloon {
     }
 }
 
-
+function spawnBaloons() {
+    balloons.push(new Balloon(images[Math.floor(Math.random() * images.length)], Math.random() * (canvas.width - 50), canvas.height))
+}
 
 function loop() {
 
     c.clearRect(0, 0, canvas.width, canvas.height)
-    // c.fillText('HTML Canvas', mouse.x, mouse.y)
 
     let balloonsToRemove = []
+
+    if (balloonCooldown < 0 && giftHidden) {
+        balloonCooldown = 100
+        spawnBaloons();
+    }
 
     balloons.forEach(b => {
         b.y -= 3
@@ -105,9 +111,6 @@ function loop() {
         if (giftAlpha < 0) {
             hidingGift = false
             giftHidden = true
-            setInterval(() => {
-                balloons.push(new Balloon(images[Math.floor(Math.random() * images.length)], Math.random() * (canvas.width - 50), canvas.height))
-            }, 200)
             setTimeout(() => {
                 textShowing = true;
             }, 100)
@@ -121,7 +124,6 @@ function loop() {
     } else if (!giftHidden) {
         c.drawImage(giftImage, canvas.width / 2 - 128, canvas.height / 2 - 128, 256, 256)
     }
-    // c.drawImage(bgImage, canvas.width / 2 - 256, canvas.height / 2 - 212, 512, 424)
 
     if (textShowing) {
         textAlpha += .005
@@ -135,10 +137,11 @@ function loop() {
         c.drawImage(bgImage, canvas.width / 2 - 256, canvas.height / 2 - 200, 512, 424)
         c.globalAlpha = 1
     }
-    else if(letterShown){
+    else if (letterShown) {
         c.drawImage(bgImage, canvas.width / 2 - 256, canvas.height / 2 - 200, 512, 424)
     }
 
+    balloonCooldown -= 10
     window.requestAnimationFrame(loop)
 }
 

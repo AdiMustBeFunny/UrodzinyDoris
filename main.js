@@ -132,11 +132,11 @@ function loop() {
         }
         textContainer.style.opacity = `${textAlpha}`
         c.globalAlpha = textAlpha
-        c.drawImage(bgImage, canvas.width / 2 - 256, canvas.height / 2 - 212, 512, 424)
+        c.drawImage(bgImage, canvas.width / 2 - 256, canvas.height / 2 - 200, 512, 424)
         c.globalAlpha = 1
     }
     else if(letterShown){
-        c.drawImage(bgImage, canvas.width / 2 - 256, canvas.height / 2 - 212, 512, 424)
+        c.drawImage(bgImage, canvas.width / 2 - 256, canvas.height / 2 - 200, 512, 424)
     }
 
     window.requestAnimationFrame(loop)

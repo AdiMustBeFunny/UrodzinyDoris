@@ -4,7 +4,8 @@ const textContainer = document.querySelector('.text-container')
 
 const mouse = {
     x: window.innerWidth / 2,
-    y: window.innerHeight / 2
+    y: window.innerHeight / 2,
+    pressed: false
 }
 
 canvas.width = window.innerWidth
@@ -26,6 +27,14 @@ window.addEventListener("click", (e) => {
     }
     hidingGift = true
 })
+
+window.addEventListener('mousedown', e => {
+    mouse.pressed = true
+});
+
+window.addEventListener('mouseup', e => {
+    mouse.pressed = false
+});
 
 function getImages() {
     let images = []
@@ -95,7 +104,11 @@ function loop() {
     }
 
     balloons.forEach(b => {
-        b.y -= 3
+        if(mouse.pressed){
+            b.y -= 5
+        } else{
+            b.y -= 3
+        }
         c.drawImage(b.image, b.x, b.y, 50, 100)
 
         if (b.y < - 100) {
@@ -141,7 +154,11 @@ function loop() {
         c.drawImage(bgImage, canvas.width / 2 - 256, canvas.height / 2 - 200, 512, 424)
     }
 
-    balloonCooldown -= 10
+    if(mouse.pressed){
+        balloonCooldown -= 20        
+    }else{
+        balloonCooldown -= 10
+    }
     window.requestAnimationFrame(loop)
 }
 

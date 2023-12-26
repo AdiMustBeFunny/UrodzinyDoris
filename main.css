@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Doodle+Shadow&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+}
+
+canvas{
+    display: block;
+}
+
+.text-container{
+position: fixed;
+left: 0;
+top: 0;
+width: 100vw;
+height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+font-family:'Lobster';
+/* font-family:'Rubik Doodle Shadow'; */
+/* font-family:'Courier New', Courier, monospace; */
+opacity: 0;
+}
+
+.s{
+    display: block;
+    margin-top: 20px;
+    font-size: 24px;
+}
